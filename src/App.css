@@ -88,7 +88,7 @@ body {
   margin: 25px;
 }
 
-.header h1 {
+.header2 {
   /* Non-accessible color */
   color: #edc84b;
   /* color: #af8602; */
@@ -103,8 +103,8 @@ body {
   display: block;
 }
 
-.header h1::before,
-.header h1::after {
+.header2::before,
+.header2::after {
   display: block;
   content: "";
   height: 5px;
@@ -113,11 +113,11 @@ body {
   position: absolute;
 }
 
-.header h1::before {
+.header2::before {
   left: 0;
 }
 
-.header h1::after {
+.header2::after {
   right: 0;
 }
 

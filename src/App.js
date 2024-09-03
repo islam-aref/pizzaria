@@ -1,9 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import Flashcards from "./Flashcards";
+import Order from "./Order";
 import "./App.css";
 
 const pizzaData = [
   {
-    name: "Focaccia",
+    name: "Pizza Focaccia",
     ingredients: "Bread with italian olive oil and rosemary",
     price: 6,
     photoName: "pizzas/focaccia.jpg",
@@ -35,14 +39,14 @@ const pizzaData = [
     ingredients: "Tomato, mozarella, and pepperoni",
     price: 15,
     photoName: "pizzas/salamino.jpg",
-    soldOut: true,
+    soldOut: false,
   },
   {
     name: "Pizza Prosciutto",
     ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
     price: 18,
     photoName: "pizzas/prosciutto.jpg",
-    soldOut: false,
+    soldOut: true,
   },
 ];
 
@@ -52,6 +56,10 @@ function App() {
       <Header />
       <Menu />
       <Footer />
+      <Routes>
+        <Route path="/Order" element={<Order />} />
+        <Route path="/Flashcards" element={<Flashcards />} />
+      </Routes>
     </div>
   );
 }
@@ -59,7 +67,7 @@ function App() {
 function Header() {
   return (
     <header className="header">
-      <h1> Smsm React Pizza Co. </h1>
+      <div className="header2"> Smsm & Bsan Pizza Co. </div>
     </header>
   );
 }
@@ -82,13 +90,14 @@ function Menu() {
 }
 
 function Pizza({ pizzaObj }) {
+  const price_pizza = pizzaObj.soldOut ? "SOLD OUT" : `${pizzaObj.price} €`;
   return (
     <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
       <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
         <h3>{pizzaObj.name}</h3>
         <p>{pizzaObj.ingredients}</p>
-        <span>Price: {pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</span>
+        <span>Price: {price_pizza}</span>
       </div>
     </li>
   );
@@ -99,12 +108,24 @@ function Footer() {
   const openHour = 0;
   const closeHour = 23;
   const isOpen = hour >= openHour && hour <= closeHour;
+  const navigate = useNavigate();
+  function handleOrderNowClick() {
+    navigate("/Order");
+  }
+  function handleFlashClick() {
+    navigate("/Flashcards");
+  }
   return (
     <footer className="footer">
       {isOpen ? (
         <div className="order">
           <p>We're open until {closeHour}:00, Come visit us or order Online!</p>
-          <button className="btn">Order</button>
+          <button className="btn" onClick={handleOrderNowClick}>
+            Order Now!
+          </button>
+          <button className="btn" onClick={handleFlashClick}>
+            Flash Cards
+          </button>
         </div>
       ) : (
         <p>
