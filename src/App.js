@@ -67,7 +67,7 @@ function App() {
 function Header() {
   return (
     <header className="header">
-      <div className="header2"> Smsm & Bsan Pizza Co. </div>
+      <div className="header2"> Smsm & Ashtar Chef Pizza Co. </div>
     </header>
   );
 }
